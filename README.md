@@ -2,6 +2,8 @@
 
 A RESTful API for markdown note-taking with grammar checking capabilities.
 
+This project is a solution for the [Markdown Note-taking App](https://roadmap.sh/projects/markdown-note-taking-app) challenge from [roadmap.sh](https://roadmap.sh).
+
 ## Features
 
 - Create, read, update, and delete markdown notes
@@ -16,7 +18,7 @@ A RESTful API for markdown note-taking with grammar checking capabilities.
 - **SQLAlchemy** - ORM
 - **SQLite** - Database
 - **Markdown** - Markdown to HTML conversion
-- **LanguageTool** - Grammar checking
+- **LanguageTool API** - Grammar checking
 
 ## Installation
 
@@ -32,10 +34,6 @@ source venv/bin/activate  # Linux/Mac
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Optional: Install Java for grammar checking
-sudo apt install default-jre  # Linux
-# brew install openjdk        # macOS
 ```
 
 ## Running the API
