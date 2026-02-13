@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 
+from app.database import engine, Base
+from app.models import Note  # noqa: F401
+
+Base.metadata.create_all(bind=engine)
+
 app = FastAPI(
     title="Note Mark API",
-    description="API for note-taking and grammar checking",
+    description="Markdown note-taking API with grammar checking",
     version="1.0.0"
 )
 
