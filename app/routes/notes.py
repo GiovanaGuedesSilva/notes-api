@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -52,3 +52,17 @@ def update_note(note_id: int, note_data: NoteUpdate, db: Session = Depends(get_d
 def delete_note(note_id: int, db: Session = Depends(get_db)):
     if not repository.delete_note(db, note_id):
         raise HTTPException(status_code=404, detail="Note not found")
+
+
+@router.post("/upload", response_model=NoteResponse, status_code=status.HTTP_201_CREATED)
+async def upload_note(file: UploadFile = File(...), db: Session = Depends(get_db)):
+    if not file.filename.endswith(".md"):
+        raise HTTPException(status_code=400, detail="Only .md files are allowed")
+
+    content = await file.read()
+    content_str = content.decode("utf-8")
+
+    title = file.filename.replace(".md", "")
+
+    note_data = NoteCreate(title=title, content=content_str)
+    return repository.create_note(db, note_data)

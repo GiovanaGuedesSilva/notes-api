@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from app.database import engine, Base
 from app.models import Note  # noqa: F401
-from app.routes import notes
+from app.routes import notes, grammar
 
 Base.metadata.create_all(bind=engine)
 
@@ -13,6 +13,7 @@ app = FastAPI(
 )
 
 app.include_router(notes.router)
+app.include_router(grammar.router)
 
 
 @app.get("/")

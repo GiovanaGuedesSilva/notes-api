@@ -43,3 +43,4 @@ class GrammarCheckResponse(BaseModel):
     text: str
     errors: list[GrammarError]
     error_count: int
+    warning: str | None = None
